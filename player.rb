@@ -1,4 +1,6 @@
 class Player
+  
+  include GameRules
 
   attr_accessor :cards, :bank
   attr_reader :score, :name
@@ -21,7 +23,7 @@ class Player
   end
 
   def excess?
-    return true if @score > 21
+    @score > GameRules::BJ
   end
 
   def check_aces!
