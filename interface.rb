@@ -36,13 +36,14 @@ module Interface
 
   def show_hands
     [@gamer, @dealer].each { |player| show_cards(player) }
-    if winner.nil?
-      puts "\nНичья!"
-      #split_bank
-    else
-      puts "\nПобедил #{winner.name}"
-      #withdraw(@game, winner)
-    end
+  end
+
+  def show_draw
+    puts "Ничья!\n"
+  end
+
+  def show_winner(winner)
+    puts "Победил #{winner.name)}!\n"
   end
 
   def play_again?

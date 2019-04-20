@@ -5,8 +5,8 @@ class Player
   attr_accessor :hand
 
   def initialize(*name)
-    @bank = 100
     new_hand
+    @bank = GameRules::DEFAULT_BANK
   end
 
   def new_hand
@@ -14,13 +14,10 @@ class Player
   end
 
   def withdraw(value)
+    @bank -= value
+  end
+
+  def debit(value)
     @bank += value
   end
-
-  def bet(value = GameRules::DEFAULT_BET)
-    return false if @bank < value
-    @bank -= value
-    true
-  end
-
 end

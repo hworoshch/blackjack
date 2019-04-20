@@ -1,4 +1,5 @@
 require_relative 'interface'
+require_relative 'accountant'
 require_relative 'game'
 require_relative 'game_rules'
 require_relative 'player'
@@ -16,9 +17,17 @@ class Main
     loop do
       reset_hands
       @game = Game.new
+      @accountant = Accountant.new
       first_deal
       play_game
       show_hands
+      if winner.nil?
+        show_draw
+        @accountant.refund([@dealer, @gamer])
+      else
+        show_winner(winner)
+        @accountant.reward_winner(winner)
+      end
       break unless play_again?
     end
   end
@@ -37,8 +46,7 @@ class Main
   def first_deal
     [@gamer, @dealer].each do |player|
       player.hand.add_cards(@game.pack.deal(2))
-      player.bet
-      game.receive_bet
+      @accountant.bet(player)
     end
   end
 
