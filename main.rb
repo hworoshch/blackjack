@@ -31,13 +31,14 @@ class Main
   end
 
   def reset_hands
-    [@gamer, @dealer].each { |player| player.cards = [] }
+    [@gamer, @dealer].each { |player| player.new_hand }
   end
 
   def first_deal
     [@gamer, @dealer].each do |player|
-      player.add_cards(@game.pack.deal(2))
-      #withdraw(player, @game, GameRules::DEFAULT_BET)
+      player.hand.add_cards(@game.pack.deal(2))
+      player.bet
+      game.receive_bet
     end
   end
 
@@ -47,13 +48,13 @@ class Main
       show_cards(@gamer)
       show_header(@gamer.name)
       show_menu(PLAYER_MENU)
-      case gets.to_i
-      when 2 then break if @gamer.add_cards(@game.pack.deal)
+      case players_choice
+      when 2 then break if @gamer.hand.add_cards(@game.pack.deal)
       when 3 then break
       end
       header(@dealer.name)
       if @dealer.score < GameRules::DEALER_MAX_POINTS
-        break if @dealer.add_cards(@game.pack.deal)
+        break if @dealer.hand.add_cards(@game.pack.deal)
       end
     end
   end
@@ -65,15 +66,5 @@ class Main
     @gamer if @dealer.excess?
     [@gamer, @dealer].max_by(&:score)
   end
-
-  #def withdraw(from, to, value = from.bank)
-  #  from.bank -= value
-  #  to.bank += value
-  #end
-
-  #def split_bank
-  #  value = @game.bank / 2
-  #  [@gamer, @dealer].each { |player| withdraw(@game, player, value) }
-  #end
 
 end

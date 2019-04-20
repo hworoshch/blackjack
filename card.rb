@@ -9,11 +9,6 @@ class Card
     @value = get_value
   end
 
-  def discount_ace!(card)
-    return unless @rank == 'A'
-    @value = 1
-  end
-
   protected
 
   def get_value

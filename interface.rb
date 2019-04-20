@@ -19,6 +19,10 @@ module Interface
     gets.chomp.to_s
   end
 
+  def players_choice
+    gets.to_i
+  end
+
   def show_cards(player, hidden = false)
     print "#{player.name} [банк #{player.bank}]:"
     if hidden
