@@ -1,3 +1,4 @@
+require_relative 'interface'
 require_relative 'game'
 require_relative 'player'
 require_relative 'gamer'
@@ -32,12 +33,12 @@ class Main
       puts "2. Добавить карту"
       puts "3. Открыть карты"
       case gets.to_i
-      when 2 then break if add_card(@gamer)
+      when 2 then break if @gamer.add_cards(@game.pack.deal)
       when 3 then break
       end
       puts "\nХодит #{@dealer.name}:"
       if @dealer.score < 17
-        break if add_card(@dealer)
+        break if @dealer.add_cards(@game.pack.deal)
       end
     end
   end
@@ -55,7 +56,7 @@ class Main
 
   def first_deal
     [@gamer, @dealer].each do |player|
-      @game.pack.deal(player, 2)
+      player.add_cards(@game.pack.deal(2))
       withdraw(player, @game, 10)
     end
   end
@@ -69,12 +70,6 @@ class Main
       player.cards.each { |card| print " #{card.suit}#{card.rank}" }
       puts ", очки: #{player.score}\n"
     end
-  end
-
-  def add_card(player)
-    return false if player.cards.count > 2
-    @game.pack.deal(player)
-    true
   end
 
   def winner

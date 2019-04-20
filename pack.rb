@@ -10,10 +10,12 @@ class Pack
     create_pack!
   end
 
-  def deal(player, cards = 1)
+  def deal(cards = 1)
+    to_hand = []
     cards.times do
-      player.cards << @cards.shift
+      to_hand << @cards.shift
     end
+    to_hand
   end
 
   private

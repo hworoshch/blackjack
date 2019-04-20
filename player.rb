@@ -8,7 +8,11 @@ class Player
     @cards = []
   end
 
-  # при переборе найти туз в колоде и установить value в 1
+  def add_cards(cards)
+    return false if @cards.count > 2
+    @cards += cards
+    true
+  end
 
   def score
     @score = 0
