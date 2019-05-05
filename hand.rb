@@ -14,33 +14,21 @@ class Hand
   end
 
   def score
-    count_score
-    until excess?
-      aces_found = check_aces!
-      count_score
-      break unless aces_found
-    end
-    @score
-  end
-
-  def count_score
-    @score = 0
-    @cards.each { |card| @score += card.value }
+    sum = @cards.sum(&:value)
+    ace_correction(sum)
   end
 
   def excess?
-    @score > GameRules::BJ
+    score > GameRules::BJ
   end
 
-  def check_aces!
-    result = false
+  private
+
+  def ace_correction(sum)
     @cards.each do |card|
-      next unless card.rank == 'A' && card.value == 10
-      card.value = 1
-      result = true
-      break
+      next unless card.ace?
+      sum -= GameRules::ACE_CORRECTION if sum > GameRules::BJ
     end
-    result
-  end  
+  end
 
 end

@@ -1,4 +1,4 @@
-module Interface
+class Interface
 
   PLAYER_MENU = %w[
     Пропустить ход
