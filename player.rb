@@ -1,8 +1,12 @@
+require 'forwardable'
+
 class Player
+  extend Forwardable
   include GameRules
 
   attr_reader :name
   attr_accessor :hand
+  def_delegator :@hand, :add_cards, :add_cards
 
   def initialize(*name)
     new_hand

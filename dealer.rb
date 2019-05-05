@@ -1,8 +1,6 @@
 class Dealer < Player
 
-  NAME = 'Дилер'
-
-  def initialize(name = NAME)
+  def initialize(name = GameRule::DEALER_NAME)
     @name = name
     super
   end

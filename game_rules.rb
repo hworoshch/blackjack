@@ -4,4 +4,6 @@ module GameRules
   DEFAULT_BET = 10
   DEFAULT_BANK = 100
   ACE_CORRECTION = 10
+  DEFAULT_GAMER_NAME = 'Игрок'
+  DEALER_NAME = 'Дилер'
 end

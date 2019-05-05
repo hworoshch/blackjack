@@ -41,7 +41,7 @@ class Main
 
   def first_deal
     [@gamer, @dealer].each do |player|
-      player.hand.add_cards(@pack.deal(2))
+      player.add_cards(@pack.deal(2))
       @accountant.bet(player)
     end
   end
@@ -53,12 +53,12 @@ class Main
       @interface.show_header(@gamer.name)
       @interface.show_menu(PLAYER_MENU)
       case @interface.players_choice
-      when 2 then break if @gamer.hand.add_cards(@pack.deal)
+      when 2 then break if @gamer.add_cards(@pack.deal)
       when 3 then break
       end
       @interface.header(@dealer.name)
       if @dealer.score < GameRules::DEALER_MAX_POINTS
-        break if @dealer.hand.add_cards(@pack.deal)
+        break if @dealer.add_cards(@pack.deal)
       end
     end
   end
