@@ -29,5 +29,6 @@ class Hand
 
       sum -= GameRules::ACE_CORRECTION if sum > GameRules::BJ
     end
+    sum
   end
 end

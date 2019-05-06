@@ -1,6 +1,7 @@
 require_relative 'interface'
 require_relative 'accountant'
 require_relative 'game_rules'
+require_relative 'hand'
 require_relative 'player'
 require_relative 'gamer'
 require_relative 'dealer'
@@ -21,9 +22,9 @@ class Main
       reset_state
       first_deal
       play_game
-      @interface.show_hands
+      show_hands
       round_results
-      break unless play_again?
+      break unless @interface.play_again?
     end
   end
 
@@ -51,7 +52,7 @@ class Main
       @interface.show_cards(@dealer, true)
       @interface.show_cards(@gamer)
       @interface.show_header(@gamer.name)
-      @interface.show_menu(PLAYER_MENU)
+      @interface.show_menu(Interface::PLAYER_MENU)
       case @interface.players_choice
       when 2 then break if @gamer.add_cards(@pack.deal)
       when 3 then break
@@ -61,6 +62,10 @@ class Main
         break if @dealer.add_cards(@pack.deal)
       end
     end
+  end
+
+  def show_hands
+    [@dealer, @gamer].each { |player| @interface.show_cards(player) }
   end
 
   def round_results

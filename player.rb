@@ -8,6 +8,7 @@ class Player
   def_delegator :@hand, :add_cards, :add_cards
   def_delegator :@hand, :cards, :cards
   def_delegator :@hand, :score, :score
+  def_delegator :@hand, :excess?, :excess?
 
   def initialize(*name)
     new_hand

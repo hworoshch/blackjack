@@ -9,7 +9,7 @@ class Card
   end
 
   def ace?
-    card.rank == 'A'
+    @rank == 'A'
   end
 
   protected
