@@ -36,7 +36,7 @@ class Main
 
   def reset_state
     @pack = Pack.new
-    [@gamer, @dealer].each { |player| player.new_hand }
+    [@gamer, @dealer].each(&:new_hand)
   end
 
   def first_deal
@@ -56,7 +56,7 @@ class Main
       when 2 then break if @gamer.add_cards(@pack.deal)
       when 3 then break
       end
-      @interface.header(@dealer.name)
+      @interface.show_header(@dealer.name)
       if @dealer.score < GameRules::DEALER_MAX_POINTS
         break if @dealer.add_cards(@pack.deal)
       end
@@ -75,11 +75,11 @@ class Main
   end
 
   def define_winner
-    return nil if @gamer.score == @dealer.score
-    return nil if @gamer.excess? && @dealer.excess?
+    return if @gamer.score == @dealer.score
+    return if @gamer.excess? && @dealer.excess?
+
     @dealer if @gamer.excess?
     @gamer if @dealer.excess?
     [@gamer, @dealer].max_by(&:score)
   end
-
 end

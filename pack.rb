@@ -1,8 +1,4 @@
 class Pack
-
-  CARD_SUITS = ['♠', '♥', '♦', '♣']
-  CARD_RANKS = [*('2'..'10'), 'J', 'K', 'Q', 'A']
-
   attr_reader :cards
 
   def initialize
@@ -21,8 +17,8 @@ class Pack
   private
 
   def create_pack!
-    CARD_SUITS.each do |suit|
-      CARD_RANKS.each do |rank|
+    GameRules::CARD_SUITS.each do |suit|
+      GameRules::CARD_RANKS.each do |rank|
         @cards << Card.new(suit, rank)
       end
     end

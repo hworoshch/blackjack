@@ -1,5 +1,4 @@
 class Card
-
   attr_reader :rank, :suit
   attr_accessor :value
 
@@ -24,5 +23,4 @@ class Card
       11
     end
   end
-
 end

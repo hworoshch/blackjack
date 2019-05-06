@@ -1,7 +1,5 @@
 class Hand
-
   attr_accessor :cards
-  attr_reader :score
 
   def initialize
     @cards = []
@@ -9,6 +7,7 @@ class Hand
 
   def add_cards(cards)
     return false if @cards.count > 2
+
     @cards += cards
     true
   end
@@ -27,8 +26,8 @@ class Hand
   def ace_correction(sum)
     @cards.each do |card|
       next unless card.ace?
+
       sum -= GameRules::ACE_CORRECTION if sum > GameRules::BJ
     end
   end
-
 end

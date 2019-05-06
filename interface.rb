@@ -1,9 +1,9 @@
 class Interface
-
   PLAYER_MENU = %w[
     Пропустить ход
     Добавить карту
-    Открыть карты ].freeze
+    Открыть карты
+  ].freeze
 
   def show_header(player_name)
     puts "\nХодит #{player_name}:"
@@ -26,7 +26,7 @@ class Interface
   def show_cards(player, hidden = false)
     print "#{player.name} [банк #{player.bank}]:"
     if hidden
-      player.cards.each { |card| print " *" }
+      player.cards.each { print ' *' }
       puts "\n"
     else
       player.cards.each { |card| print " #{card.suit}#{card.rank}" }
@@ -43,12 +43,11 @@ class Interface
   end
 
   def show_winner(winner)
-    puts "Победил #{winner.name)}!\n"
+    puts "Победил #{winner.name}!\n"
   end
 
   def play_again?
     puts "\nИграть еще раз? (1/0)"
     gets.to_i == 1
   end
-
 end

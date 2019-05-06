@@ -6,8 +6,8 @@ class Accountant
   end
 
   def bet(player)
-    player.withdraw(GameRules::BET)
-    @bank += GameRules::BET
+    player.withdraw(GameRules::DEFAULT_BET)
+    @bank += GameRules::DEFAULT_BET
   end
 
   def reward_winner(winner)
