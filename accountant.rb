@@ -15,7 +15,7 @@ class Accountant
     @bank = 0
   end
 
-  def refund(*players)
+  def refund(players)
     refund_amount = @bank / players.count
     players.each { |player| player.debit(refund_amount) }
     @bank = 0
