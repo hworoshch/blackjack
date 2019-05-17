@@ -19,9 +19,11 @@ class Main
   def run
     create_players
     loop do
+      break unless @dealer.enough_money?
+      break unless @gamer.enough_money?
       reset_state
       first_deal
-      play_game
+      play_round
       show_hands
       round_results
       break unless @interface.play_again?
@@ -47,21 +49,25 @@ class Main
     end
   end
 
-  def play_game
-    loop do
-      @interface.show_cards(@dealer, true)
-      @interface.show_cards(@gamer)
-      @interface.show_header(@gamer.name)
-      @interface.show_menu(Interface::PLAYER_MENU)
-      case @interface.players_choice
-      when 2 then break if @gamer.add_cards(@pack.deal)
-      when 3 then break
-      end
-      @interface.show_header(@dealer.name)
-      if @dealer.score < GameRules::DEALER_MAX_POINTS
-        break if @dealer.add_cards(@pack.deal)
-      end
+  def play_round
+    @interface.show_cards(@dealer, true)
+    @interface.show_cards(@gamer)
+    gamer_turn
+    dealer_turn
+  end
+
+  def gamer_turn
+    @interface.show_header(@gamer.name)
+    @interface.show_menu(Interface::PLAYER_MENU)
+    case @interface.players_choice
+    when 2 then return if @gamer.add_cards(@pack.deal)
+    when 3 then return
     end
+  end
+
+  def dealer_turn
+    @interface.show_header(@dealer.name)
+    return if @dealer.add_cards(@pack.deal)
   end
 
   def show_hands
@@ -82,9 +88,8 @@ class Main
   def define_winner
     return if @gamer.score == @dealer.score
     return if @gamer.excess? && @dealer.excess?
-
-    @dealer if @gamer.excess?
-    @gamer if @dealer.excess?
+    return @dealer if @gamer.excess?
+    return @gamer if @dealer.excess?
     [@gamer, @dealer].max_by(&:score)
   end
 end

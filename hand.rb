@@ -5,11 +5,12 @@ class Hand
     @cards = []
   end
 
-  def add_cards(cards)
-    return false if @cards.count > 2
+  def can_add_card?
+    @cards.count < 3
+  end
 
+  def add_cards(cards)
     @cards += cards
-    true
   end
 
   def score

@@ -3,4 +3,10 @@ class Dealer < Player
     @name = name
     super
   end
+
+  def can_add_card?
+    score < GameRules::DEALER_MAX_POINTS
+    super
+  end
+
 end
