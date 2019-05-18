@@ -15,7 +15,7 @@ class Main
     skip: 0,
     add_card: 1,
     open_cards: 2
-  }
+  }.freeze
 
   def run
     create_players
