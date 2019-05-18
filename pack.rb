@@ -1,17 +1,18 @@
 class Pack
-  attr_reader :cards
-
   def initialize
-    @cards = []
     create_pack!
   end
 
-  def deal(cards = 1)
+  def deal(cards_count = 1)
     to_hand = []
-    cards.times do
-      to_hand << @cards.shift
+    cards_count.times do
+      to_hand << cards.shift
     end
     to_hand
+  end
+
+  def cards
+    @cards ||= []
   end
 
   private
@@ -19,9 +20,9 @@ class Pack
   def create_pack!
     GameRules::CARD_SUITS.each do |suit|
       GameRules::CARD_RANKS.each do |rank|
-        @cards << Card.new(suit, rank)
+        cards << Card.new(suit, rank)
       end
     end
-    @cards.shuffle!
+    cards.shuffle!
   end
 end
