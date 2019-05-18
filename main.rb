@@ -34,14 +34,6 @@ class Main
 
   protected
 
-  def interface
-    @interface ||= Interface.new
-  end
-
-  def accountant
-    @accountant ||= Accountant.new
-  end
-
   def create_players
     @gamer = Gamer.new(interface.ask_name)
     @dealer = Dealer.new
@@ -120,5 +112,15 @@ class Main
     return @gamer if @dealer.excess?
 
     [@gamer, @dealer].max_by(&:score)
+  end
+
+  private
+
+  def interface
+    @interface ||= Interface.new
+  end
+
+  def accountant
+    @accountant ||= Accountant.new
   end
 end
