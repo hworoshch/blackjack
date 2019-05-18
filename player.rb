@@ -12,8 +12,8 @@ class Player
     @bank = GameRules::DEFAULT_BANK
   end
 
-  def can_add_card?
-    @cards.count < 3
+  def can_take_card?
+    cards.count < GameRules::MAX_CARDS_COUNT
   end
 
   def enough_money?

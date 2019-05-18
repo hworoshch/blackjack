@@ -6,7 +6,7 @@ class Hand
   end
 
   def can_add_card?
-    @cards.count < 3
+    @cards.count < GameRules::MAX_CARDS_COUNT
   end
 
   def add_cards(cards)

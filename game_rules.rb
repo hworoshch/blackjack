@@ -8,4 +8,5 @@ module GameRules
   DEALER_NAME = 'Дилер'.freeze
   CARD_SUITS = ['♠', '♥', '♦', '♣'].freeze
   CARD_RANKS = [*('2'..'10'), 'J', 'K', 'Q', 'A'].freeze
+  MAX_CARDS_COUNT = 3
 end
