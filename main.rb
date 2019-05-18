@@ -25,7 +25,8 @@ class Main
   def run
     create_players
     loop do
-      break unless players_have_money?
+      break @interface.not_enough_money(@dealer) unless @dealer.enough_money?
+      break @interface.not_enough_money(@gamer) unless @gamer.enough_money?
       reset_state
       first_deal
       play_round
@@ -40,16 +41,6 @@ class Main
   def create_players
     @gamer = Gamer.new(@interface.ask_name)
     @dealer = Dealer.new
-  end
-
-  def players_have_money?
-    [@gamer, @dealer].each do |player|
-      unless player.enough_money?
-        @interface.not_enough_money(player)
-        return false
-      end
-    end
-    return true
   end
 
   def reset_state
