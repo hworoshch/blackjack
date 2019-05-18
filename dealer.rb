@@ -4,7 +4,7 @@ class Dealer < Player
     super
   end
 
-  def can_add_card?
+  def can_take_card?
     super && score < GameRules::DEALER_MAX_POINTS
   end
 end

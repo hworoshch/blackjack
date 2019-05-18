@@ -13,7 +13,7 @@ class Player
   end
 
   def can_take_card?
-    cards.count < GameRules::MAX_CARDS_COUNT
+    !hand.full?
   end
 
   def enough_money?
