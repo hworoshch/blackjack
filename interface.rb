@@ -38,6 +38,10 @@ class Interface
     puts "Ничья!\n"
   end
 
+  def not_enough_money(player)
+    puts "#{player.name}: недостаточно денег для ставки\n"
+  end
+
   def show_winner(winner)
     puts "Победил #{winner.name}!\n"
   end
